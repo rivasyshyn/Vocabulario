@@ -2,4 +2,6 @@
 <resources>
     <color name="accent">#5c88ff</color>
     <color name="primary">#ffbe25</color>
+    <color name="word">#003f5e</color>
+    <color name="translation">#d99c6e19</color>
 </resources>

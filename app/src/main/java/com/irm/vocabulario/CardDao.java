@@ -45,12 +45,14 @@ public class CardDao {
             ContentValues contentValues = new ContentValues();
             contentValues.put("word", cardModel.getWord());
             contentValues.put("translation", cardModel.getTranslation());
-            long id = db.insert("CARD", "id", contentValues);
-            if (id > -1) {
-                cardModel.setId(id);
-                return cardModel;
+            if (getCard(cardModel.getId()) == null) {
+                long id = db.insert("CARD", "id", contentValues);
+                if (id > -1) {
+                    cardModel.setId(id);
+                }
+            } else {
+                db.update("CARD", contentValues, "id==?", new String[]{getId(cardModel.getId())});
             }
-            db.update("CARD", contentValues, "id==?", new String[]{getId(cardModel.getId())});
             db.setTransactionSuccessful();
         } finally {
             db.endTransaction();
